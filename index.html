@@ -101,15 +101,15 @@
                 <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-sky-500/10 rounded-full blur-xl group-hover:bg-sky-500/20 transition-all"></div>
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs text-sky-400 font-medium tracking-wide uppercase">ยอดรวม Metric 1</p>
+                        <p class="text-xs text-sky-400 font-medium tracking-wide uppercase">จำนวนโครงการรวม (Total Projects)</p>
                         <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-metric1-total">73</h3>
                         <p class="text-xs text-slate-400 mt-1 flex items-center gap-1">
                             <i data-lucide="trending-up" class="w-3.5 h-3.5 text-sky-400"></i>
-                            รวมทุกหมวดหมู่ (KLP, CA, BO, LW)
+                            รวมทุก PM (KLP, CA, BO, LW)
                         </p>
                     </div>
                     <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
-                        <i data-lucide="database" class="w-5 h-5"></i>
+                        <i data-lucide="folder-kanban" class="w-5 h-5"></i>
                     </div>
                 </div>
             </div>
@@ -119,11 +119,11 @@
                 <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-crimson-500/10 rounded-full blur-xl group-hover:bg-crimson-500/20 transition-all"></div>
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs text-crimson-500 font-medium tracking-wide uppercase">ยอดรวม Metric 2</p>
+                        <p class="text-xs text-crimson-500 font-medium tracking-wide uppercase">กำลังการติดตั้งรวม (Solar Installed)</p>
                         <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-metric2-total">12.7</h3>
                         <p class="text-xs text-slate-400 mt-1 flex items-center gap-1">
-                            <i data-lucide="activity" class="w-3.5 h-3.5 text-crimson-400"></i>
-                            ผลลัพธ์ประเมินรวม
+                            <i data-lucide="sun" class="w-3.5 h-3.5 text-crimson-400"></i>
+                            รวมกำลังการผลิตติดตั้งโซลาร์
                         </p>
                     </div>
                     <div class="p-3 bg-crimson-500/10 text-crimson-400 rounded-xl border border-crimson-500/20">
@@ -136,12 +136,12 @@
             <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-indigo-500/40 transition-all">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs text-indigo-400 font-medium tracking-wide uppercase">หมวดหมู่สูงสุด (Top Category)</p>
+                        <p class="text-xs text-indigo-400 font-medium tracking-wide uppercase">PM ผลงานสูงสุด (Top PM)</p>
                         <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-top-category">LW</h3>
-                        <p class="text-xs text-slate-400 mt-1" id="kpi-top-details">ค่า Metric 1: 26 | Metric 2: 5.6</p>
+                        <p class="text-xs text-slate-400 mt-1" id="kpi-top-details">No. Project: 26 | Solar Installed: 5.6</p>
                     </div>
                     <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
-                        <i data-lucide="award" class="w-5 h-5"></i>
+                        <i data-lucide="user-check" class="w-5 h-5"></i>
                     </div>
                 </div>
             </div>
@@ -150,12 +150,12 @@
             <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-cyan-500/40 transition-all">
                 <div class="flex justify-between items-start">
                     <div>
-                        <p class="text-xs text-cyan-400 font-medium tracking-wide uppercase">อัตราส่วนเฉลี่ย (Overall Ratio)</p>
+                        <p class="text-xs text-cyan-400 font-medium tracking-wide uppercase">ขนาดเฉลี่ยต่อโครงการ (Avg Installed/Project)</p>
                         <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-avg-ratio">0.174</h3>
-                        <p class="text-xs text-slate-400 mt-1">สัดส่วน Metric 2 ต่อ Metric 1</p>
+                        <p class="text-xs text-slate-400 mt-1">สัดส่วน Solar Installed ต่อ No. Project</p>
                     </div>
                     <div class="p-3 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
-                        <i data-lucide="percent" class="w-5 h-5"></i>
+                        <i data-lucide="bar-chart-2" class="w-5 h-5"></i>
                     </div>
                 </div>
             </div>
@@ -170,13 +170,13 @@
                     <div>
                         <h2 class="text-lg font-bold text-white flex items-center gap-2">
                             <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
-                            เปรียบเทียบข้อมูล Metric 1 และ Metric 2
+                            เปรียบเทียบจำนวนโครงการ (No. Project) และกำลังการผลิต (Solar Installed)
                         </h2>
-                        <p class="text-xs text-slate-400 mt-0.5">แสดงความสัมพันธ์ระหว่างปริมาณ (แท่ง) และดัชนีผลลัพธ์ (เส้น)</p>
+                        <p class="text-xs text-slate-400 mt-0.5">แสดงความสัมพันธ์ระหว่างปริมาณโครงการ (แท่ง) และขนาดติดตั้งโซลาร์ (เส้น) ตาม PM</p>
                     </div>
                     <div class="flex items-center gap-4 text-xs">
-                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-sky-500 inline-block"></span> Metric 1</span>
-                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-crimson-500 inline-block"></span> Metric 2</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-sky-500 inline-block"></span> No. Project</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-crimson-500 inline-block"></span> Solar Installed</span>
                     </div>
                 </div>
                 <div class="relative h-72 sm:h-80 w-full">
@@ -189,9 +189,9 @@
                 <div>
                     <h2 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
                         <span class="w-2.5 h-2.5 rounded-full bg-crimson-500"></span>
-                        สัดส่วนเปอร์เซ็นต์ (Distribution)
+                        สัดส่วนจำนวนโครงการ (Project Share)
                     </h2>
-                    <p class="text-xs text-slate-400 mb-4">กระจายตัวตาม Metric 1 รายหมวดหมู่</p>
+                    <p class="text-xs text-slate-400 mb-4">สัดส่วนจำนวนโครงการ (No. Project) จำแนกตาม PM</p>
                 </div>
                 <div class="relative h-64 w-full flex items-center justify-center">
                     <canvas id="donutChart"></canvas>
@@ -211,9 +211,9 @@
                     <div>
                         <h2 class="text-lg font-bold text-white flex items-center gap-2">
                             <i data-lucide="table" class="w-5 h-5 text-sky-400"></i>
-                            ตารางข้อมูลและแก้ไขสด (Live Interactive Table)
+                            ตารางข้อมูล Solar Projects ตาม PM (Live Interactive Table)
                         </h2>
-                        <p class="text-xs text-slate-400">คุณสามารถปรับเปลี่ยนตัวเลขในช่องเพื่อดูการเปลี่ยนแปลงของกราฟได้ทันที</p>
+                        <p class="text-xs text-slate-400">คุณสามารถปรับเปลี่ยนตัวเลขในตารางเพื่อดูการอัปเดตของกราฟและค่าสถิติได้ทันที</p>
                     </div>
                 </div>
 
@@ -221,11 +221,11 @@
                     <table class="w-full text-left text-sm border-collapse">
                         <thead>
                             <tr class="border-b border-slate-700/60 text-slate-400 text-xs uppercase tracking-wider bg-slate-800/40">
-                                <th class="p-3.5 rounded-l-lg">รายการ (Category)</th>
-                                <th class="p-3.5 text-center">Metric 1</th>
-                                <th class="p-3.5 text-center">Metric 2</th>
+                                <th class="p-3.5 rounded-l-lg">PM</th>
+                                <th class="p-3.5 text-center">No. Project</th>
+                                <th class="p-3.5 text-center">Solar Installed</th>
                                 <th class="p-3.5 text-center">สัดส่วน (% Share)</th>
-                                <th class="p-3.5 text-center">อัตราส่วน (M2 / M1)</th>
+                                <th class="p-3.5 text-center">เฉลี่ย/โครงการ</th>
                                 <th class="p-3.5 rounded-r-lg text-right">Visual Bar</th>
                             </tr>
                         </thead>
@@ -239,7 +239,7 @@
                                 <td class="p-3.5 text-center text-crimson-400" id="table-total-m2">12.7</td>
                                 <td class="p-3.5 text-center">100.0%</td>
                                 <td class="p-3.5 text-center text-cyan-400" id="table-avg-ratio">0.174</td>
-                                <td class="p-3.5 text-right text-xs text-slate-400">4 รายการ</td>
+                                <td class="p-3.5 text-right text-xs text-slate-400">4 ราย PM</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -251,9 +251,9 @@
                 <div>
                     <h2 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
                         <i data-lucide="compass" class="w-5 h-5 text-crimson-400"></i>
-                        เปรียบเทียบรูปทรงสมดุล (Radar Profile)
+                        เปรียบเทียบสัดส่วนสมดุล (Radar Profile)
                     </h2>
-                    <p class="text-xs text-slate-400 mb-4">แสดงระดับความสมดุลสัมพัทธ์</p>
+                    <p class="text-xs text-slate-400 mb-4">แสดงระดับความสมดุลระหว่างจำนวนโครงการและขนาดติดตั้ง</p>
                 </div>
                 <div class="relative h-64 w-full flex items-center justify-center">
                     <canvas id="radarChart"></canvas>
@@ -332,7 +332,7 @@
                             type: 'linear',
                             display: true,
                             position: 'left',
-                            title: { display: true, text: 'Metric 1', color: '#38bdf8', font: { family: 'Prompt' } },
+                            title: { display: true, text: 'No. Project', color: '#38bdf8', font: { family: 'Prompt' } },
                             grid: { color: 'rgba(255, 255, 255, 0.05)' },
                             ticks: { color: '#94a3b8', font: { family: 'Prompt' } }
                         },
@@ -340,7 +340,7 @@
                             type: 'linear',
                             display: true,
                             position: 'right',
-                            title: { display: true, text: 'Metric 2', color: '#ef4444', font: { family: 'Prompt' } },
+                            title: { display: true, text: 'Solar Installed', color: '#ef4444', font: { family: 'Prompt' } },
                             grid: { drawOnChartArea: false },
                             ticks: { color: '#f87171', font: { family: 'Prompt' } }
                         }
@@ -393,7 +393,7 @@
                 labels: currentData.map(d => d.category),
                 datasets: [
                     {
-                        label: 'Metric 1',
+                        label: 'No. Project',
                         data: currentData.map(d => d.metric1),
                         backgroundColor: 'rgba(2, 132, 199, 0.85)',
                         borderColor: '#38bdf8',
@@ -403,7 +403,7 @@
                         order: 2
                     },
                     {
-                        label: 'Metric 2',
+                        label: 'Solar Installed',
                         data: currentData.map(d => d.metric2),
                         type: 'line',
                         borderColor: '#ef4444',
@@ -440,14 +440,14 @@
                 labels: currentData.map(d => d.category),
                 datasets: [
                     {
-                        label: 'Metric 1 (Norm)',
+                        label: 'No. Project (%)',
                         data: currentData.map(d => (d.metric1 / maxM1) * 100),
                         backgroundColor: 'rgba(56, 189, 248, 0.2)',
                         borderColor: '#38bdf8',
                         borderWidth: 2
                     },
                     {
-                        label: 'Metric 2 (Norm)',
+                        label: 'Solar Installed (%)',
                         data: currentData.map(d => (d.metric2 / maxM2) * 100),
                         backgroundColor: 'rgba(239, 68, 68, 0.2)',
                         borderColor: '#ef4444',
@@ -548,7 +548,7 @@
             document.getElementById('kpi-metric1-total').innerText = totalM1.toLocaleString();
             document.getElementById('kpi-metric2-total').innerText = totalM2.toFixed(1);
             document.getElementById('kpi-top-category').innerText = topCat.category;
-            document.getElementById('kpi-top-details').innerText = `Metric 1: ${topCat.metric1} | Metric 2: ${topCat.metric2}`;
+            document.getElementById('kpi-top-details').innerText = `No. Project: ${topCat.metric1} | Solar Installed: ${topCat.metric2}`;
             document.getElementById('kpi-avg-ratio').innerText = avgRatio;
 
             // Table footers
@@ -564,10 +564,10 @@
                     ข้อสรุปอัตโนมัติ (Automated Insights)
                 </div>
                 <p class="text-slate-300">
-                    • หมวดหมู่โดดเด่นที่สุดคือ <span class="text-sky-400 font-bold">${topCat.category}</span> ครองสัดส่วนสูงถึง <span class="text-emerald-400 font-bold">${totalM1 > 0 ? ((topCat.metric1 / totalM1)*100).toFixed(1) : 0}%</span> ของทั้งหมด
+                    • PM ที่ดูแลโครงการมากที่สุดคือ <span class="text-sky-400 font-bold">${topCat.category}</span> มีจำนวน <span class="text-emerald-400 font-bold">${topCat.metric1} โครงการ</span> (คิดเป็น ${totalM1 > 0 ? ((topCat.metric1 / totalM1)*100).toFixed(1) : 0}% ของทั้งหมด)
                 </p>
                 <p class="text-slate-300">
-                    • หมวดหมู่ที่มีปริมาณน้อยที่สุดคือ <span class="text-crimson-400 font-bold">${lowCat.category}</span> (คิดเป็น ${totalM1 > 0 ? ((lowCat.metric1 / totalM1)*100).toFixed(1) : 0}%)
+                    • PM ที่ดูแลจำนวนโครงการน้อยที่สุดคือ <span class="text-crimson-400 font-bold">${lowCat.category}</span> (${lowCat.metric1} โครงการ)
                 </p>
             `;
             lucide.createIcons();
