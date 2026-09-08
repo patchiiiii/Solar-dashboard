@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics & Performance Dashboard</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Prompt -->
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Prompt', 'sans-serif'],
+                    },
+                    colors: {
+                        navy: {
+                            50: '#f0f4f8',
+                            100: '#d9e2ec',
+                            700: '#1e3a8a',
+                            800: '#172554',
+                            900: '#0f172a',
+                        },
+                        sky: {
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                        },
+                        crimson: {
+                            500: '#ef4444',
+                            600: '#dc2626',
+                            700: '#b91c1c',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Prompt', sans-serif;
+            background-color: #0f172a;
+            color: #f8fafc;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .glow-blue {
+            box-shadow: 0 0 25px -5px rgba(14, 165, 233, 0.25);
+        }
+        .glow-red {
+            box-shadow: 0 0 25px -5px rgba(239, 68, 68, 0.25);
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-12">
+
+    <!-- Header / Navbar -->
+    <header class="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-50 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="p-2.5 bg-gradient-to-tr from-navy-700 via-sky-500 to-crimson-500 rounded-xl shadow-lg">
+                    <i data-lucide="bar-chart-3" class="w-6 h-6 text-white"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold text-white tracking-wide">Data Analytics Dashboard</h1>
+                    <p class="text-xs text-slate-400">สรุปข้อมูลเชิงวิเคราะห์และประสิทธิภาพการดำเนินงาน</p>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center space-x-3">
+                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 mr-2 animate-pulse"></span>
+                    Live Data View
+                </span>
+                <button onclick="resetData()" class="px-3.5 py-1.5 text-xs font-medium bg-slate-800 hover:bg-slate-700 border border-slate-700 rounded-lg transition-all flex items-center gap-1.5 text-slate-300">
+                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                    รีเซ็ตค่าเดิม
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 space-y-8">
+
+        <!-- KPI Summary Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <!-- Metric 1 Total -->
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-sky-500/40 transition-all glow-blue">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-sky-500/10 rounded-full blur-xl group-hover:bg-sky-500/20 transition-all"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-sky-400 font-medium tracking-wide uppercase">ยอดรวม Metric 1</p>
+                        <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-metric1-total">73</h3>
+                        <p class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                            <i data-lucide="trending-up" class="w-3.5 h-3.5 text-sky-400"></i>
+                            รวมทุกหมวดหมู่ (KLP, CA, BO, LW)
+                        </p>
+                    </div>
+                    <div class="p-3 bg-sky-500/10 text-sky-400 rounded-xl border border-sky-500/20">
+                        <i data-lucide="database" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metric 2 Total -->
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-crimson-500/40 transition-all glow-red">
+                <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-crimson-500/10 rounded-full blur-xl group-hover:bg-crimson-500/20 transition-all"></div>
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-crimson-500 font-medium tracking-wide uppercase">ยอดรวม Metric 2</p>
+                        <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-metric2-total">12.7</h3>
+                        <p class="text-xs text-slate-400 mt-1 flex items-center gap-1">
+                            <i data-lucide="activity" class="w-3.5 h-3.5 text-crimson-400"></i>
+                            ผลลัพธ์ประเมินรวม
+                        </p>
+                    </div>
+                    <div class="p-3 bg-crimson-500/10 text-crimson-400 rounded-xl border border-crimson-500/20">
+                        <i data-lucide="zap" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Performer -->
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-indigo-500/40 transition-all">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-indigo-400 font-medium tracking-wide uppercase">หมวดหมู่สูงสุด (Top Category)</p>
+                        <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-top-category">LW</h3>
+                        <p class="text-xs text-slate-400 mt-1" id="kpi-top-details">ค่า Metric 1: 26 | Metric 2: 5.6</p>
+                    </div>
+                    <div class="p-3 bg-indigo-500/10 text-indigo-400 rounded-xl border border-indigo-500/20">
+                        <i data-lucide="award" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ratio / Efficiency -->
+            <div class="glass-card rounded-2xl p-5 relative overflow-hidden group hover:border-cyan-500/40 transition-all">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <p class="text-xs text-cyan-400 font-medium tracking-wide uppercase">อัตราส่วนเฉลี่ย (Overall Ratio)</p>
+                        <h3 class="text-3xl font-extrabold text-white mt-2" id="kpi-avg-ratio">0.174</h3>
+                        <p class="text-xs text-slate-400 mt-1">สัดส่วน Metric 2 ต่อ Metric 1</p>
+                    </div>
+                    <div class="p-3 bg-cyan-500/10 text-cyan-400 rounded-xl border border-cyan-500/20">
+                        <i data-lucide="percent" class="w-5 h-5"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Main Combined Bar & Line Chart (2 Cols) -->
+            <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <span class="w-2.5 h-2.5 rounded-full bg-sky-400"></span>
+                            เปรียบเทียบข้อมูล Metric 1 และ Metric 2
+                        </h2>
+                        <p class="text-xs text-slate-400 mt-0.5">แสดงความสัมพันธ์ระหว่างปริมาณ (แท่ง) และดัชนีผลลัพธ์ (เส้น)</p>
+                    </div>
+                    <div class="flex items-center gap-4 text-xs">
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-sky-500 inline-block"></span> Metric 1</span>
+                        <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-crimson-500 inline-block"></span> Metric 2</span>
+                    </div>
+                </div>
+                <div class="relative h-72 sm:h-80 w-full">
+                    <canvas id="mainComboChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Donut / Proportion Chart (1 Col) -->
+            <div class="glass-card rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
+                        <span class="w-2.5 h-2.5 rounded-full bg-crimson-500"></span>
+                        สัดส่วนเปอร์เซ็นต์ (Distribution)
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">กระจายตัวตาม Metric 1 รายหมวดหมู่</p>
+                </div>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="donutChart"></canvas>
+                </div>
+                <div id="donutLegend" class="grid grid-cols-2 gap-2 pt-4 border-t border-slate-800 text-xs">
+                    <!-- Dynamic legend injected via JS -->
+                </div>
+            </div>
+
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Interactive Data Table (2 Cols) -->
+            <div class="lg:col-span-2 glass-card rounded-2xl p-6 shadow-xl">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-6">
+                    <div>
+                        <h2 class="text-lg font-bold text-white flex items-center gap-2">
+                            <i data-lucide="table" class="w-5 h-5 text-sky-400"></i>
+                            ตารางข้อมูลและแก้ไขสด (Live Interactive Table)
+                        </h2>
+                        <p class="text-xs text-slate-400">คุณสามารถปรับเปลี่ยนตัวเลขในช่องเพื่อดูการเปลี่ยนแปลงของกราฟได้ทันที</p>
+                    </div>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm border-collapse">
+                        <thead>
+                            <tr class="border-b border-slate-700/60 text-slate-400 text-xs uppercase tracking-wider bg-slate-800/40">
+                                <th class="p-3.5 rounded-l-lg">รายการ (Category)</th>
+                                <th class="p-3.5 text-center">Metric 1</th>
+                                <th class="p-3.5 text-center">Metric 2</th>
+                                <th class="p-3.5 text-center">สัดส่วน (% Share)</th>
+                                <th class="p-3.5 text-center">อัตราส่วน (M2 / M1)</th>
+                                <th class="p-3.5 rounded-r-lg text-right">Visual Bar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTableBody" class="divide-y divide-slate-800 text-slate-200">
+                            <!-- Table rows built dynamically -->
+                        </tbody>
+                        <tfoot class="bg-slate-900/60 font-semibold text-white border-t-2 border-slate-700">
+                            <tr>
+                                <td class="p-3.5 text-sky-400">รวมทั้งหมด (Total)</td>
+                                <td class="p-3.5 text-center text-sky-400" id="table-total-m1">73</td>
+                                <td class="p-3.5 text-center text-crimson-400" id="table-total-m2">12.7</td>
+                                <td class="p-3.5 text-center">100.0%</td>
+                                <td class="p-3.5 text-center text-cyan-400" id="table-avg-ratio">0.174</td>
+                                <td class="p-3.5 text-right text-xs text-slate-400">4 รายการ</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Radar / Performance Profile Chart (1 Col) -->
+            <div class="glass-card rounded-2xl p-6 shadow-xl flex flex-col justify-between">
+                <div>
+                    <h2 class="text-lg font-bold text-white flex items-center gap-2 mb-1">
+                        <i data-lucide="compass" class="w-5 h-5 text-crimson-400"></i>
+                        เปรียบเทียบรูปทรงสมดุล (Radar Profile)
+                    </h2>
+                    <p class="text-xs text-slate-400 mb-4">แสดงระดับความสมดุลสัมพัทธ์</p>
+                </div>
+                <div class="relative h-64 w-full flex items-center justify-center">
+                    <canvas id="radarChart"></canvas>
+                </div>
+                <!-- Insights Card -->
+                <div class="p-3.5 bg-slate-900/80 rounded-xl border border-slate-800 mt-4 text-xs space-y-1.5" id="insightBox">
+                    <!-- Dynamic insights -->
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <script>
+        // Initial Dataset extracted from image
+        const initialData = [
+            { category: 'KLP', metric1: 15, metric2: 2.6 },
+            { category: 'CA',  metric1: 20, metric2: 3.1 },
+            { category: 'BO',  metric1: 12, metric2: 1.4 },
+            { category: 'LW',  metric1: 26, metric2: 5.6 }
+        ];
+
+        // Deep copy working state
+        let currentData = JSON.parse(JSON.stringify(initialData));
+
+        // Color Palette definitions
+        const themeColors = {
+            navyDark: '#1e3a8a',
+            navyLight: '#3b82f6',
+            skyBlue: '#0284c7',
+            skyLight: '#38bdf8',
+            redCrimson: '#ef4444',
+            redDark: '#991b1b',
+            redSoft: 'rgba(239, 68, 68, 0.25)',
+            skySoft: 'rgba(56, 189, 248, 0.25)',
+            categoryColors: ['#0284c7', '#38bdf8', '#ef4444', '#f87171']
+        };
+
+        let comboChart, donutChart, radarChart;
+
+        window.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            initCharts();
+            renderTable();
+            updateKPIsAndInsights();
+        });
+
+        function initCharts() {
+            // 1. Combo Chart (Bar + Line)
+            const ctxCombo = document.getElementById('mainComboChart').getContext('2d');
+            comboChart = new Chart(ctxCombo, {
+                type: 'bar',
+                data: getComboData(),
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            titleFont: { family: 'Prompt', size: 14 },
+                            bodyFont: { family: 'Prompt', size: 12 },
+                            padding: 12,
+                            borderColor: 'rgba(255,255,255,0.1)',
+                            borderWidth: 1
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Prompt' } }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Metric 1', color: '#38bdf8', font: { family: 'Prompt' } },
+                            grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                            ticks: { color: '#94a3b8', font: { family: 'Prompt' } }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Metric 2', color: '#ef4444', font: { family: 'Prompt' } },
+                            grid: { drawOnChartArea: false },
+                            ticks: { color: '#f87171', font: { family: 'Prompt' } }
+                        }
+                    }
+                }
+            });
+
+            // 2. Donut Chart
+            const ctxDonut = document.getElementById('donutChart').getContext('2d');
+            donutChart = new Chart(ctxDonut, {
+                type: 'doughnut',
+                data: getDonutData(),
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            backgroundColor: 'rgba(15, 23, 42, 0.9)',
+                            bodyFont: { family: 'Prompt' }
+                        }
+                    }
+                }
+            });
+
+            // 3. Radar Chart
+            const ctxRadar = document.getElementById('radarChart').getContext('2d');
+            radarChart = new Chart(ctxRadar, {
+                type: 'radar',
+                data: getRadarData(),
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: { color: '#f8fafc', font: { family: 'Prompt', size: 12 } },
+                            ticks: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+
+        function getComboData() {
+            return {
+                labels: currentData.map(d => d.category),
+                datasets: [
+                    {
+                        label: 'Metric 1',
+                        data: currentData.map(d => d.metric1),
+                        backgroundColor: 'rgba(2, 132, 199, 0.85)',
+                        borderColor: '#38bdf8',
+                        borderWidth: 1.5,
+                        borderRadius: 8,
+                        yAxisID: 'y',
+                        order: 2
+                    },
+                    {
+                        label: 'Metric 2',
+                        data: currentData.map(d => d.metric2),
+                        type: 'line',
+                        borderColor: '#ef4444',
+                        backgroundColor: '#ef4444',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#ffffff',
+                        pointBorderColor: '#ef4444',
+                        pointRadius: 6,
+                        pointHoverRadius: 8,
+                        yAxisID: 'y1',
+                        order: 1
+                    }
+                ]
+            };
+        }
+
+        function getDonutData() {
+            return {
+                labels: currentData.map(d => d.category),
+                datasets: [{
+                    data: currentData.map(d => d.metric1),
+                    backgroundColor: themeColors.categoryColors,
+                    borderWidth: 2,
+                    borderColor: '#0f172a'
+                }]
+            };
+        }
+
+        function getRadarData() {
+            const maxM1 = Math.max(...currentData.map(d => d.metric1)) || 1;
+            const maxM2 = Math.max(...currentData.map(d => d.metric2)) || 1;
+
+            return {
+                labels: currentData.map(d => d.category),
+                datasets: [
+                    {
+                        label: 'Metric 1 (Norm)',
+                        data: currentData.map(d => (d.metric1 / maxM1) * 100),
+                        backgroundColor: 'rgba(56, 189, 248, 0.2)',
+                        borderColor: '#38bdf8',
+                        borderWidth: 2
+                    },
+                    {
+                        label: 'Metric 2 (Norm)',
+                        data: currentData.map(d => (d.metric2 / maxM2) * 100),
+                        backgroundColor: 'rgba(239, 68, 68, 0.2)',
+                        borderColor: '#ef4444',
+                        borderWidth: 2
+                    }
+                ]
+            };
+        }
+
+        function renderTable() {
+            const tbody = document.getElementById('dataTableBody');
+            tbody.innerHTML = '';
+
+            const totalM1 = currentData.reduce((acc, curr) => acc + curr.metric1, 0);
+            const maxM1 = Math.max(...currentData.map(d => d.metric1)) || 1;
+
+            currentData.forEach((row, index) => {
+                const sharePercent = totalM1 > 0 ? ((row.metric1 / totalM1) * 100).toFixed(1) : '0.0';
+                const ratio = row.metric1 > 0 ? (row.metric2 / row.metric1).toFixed(3) : '0.000';
+                const barWidth = Math.min(100, Math.max(5, (row.metric1 / maxM1) * 100));
+
+                const tr = document.createElement('tr');
+                tr.className = 'hover:bg-slate-800/50 transition-colors group';
+                tr.innerHTML = `
+                    <td class="p-3.5 font-bold text-white flex items-center gap-2">
+                        <span class="w-2.5 h-2.5 rounded-full inline-block" style="background-color: ${themeColors.categoryColors[index % 4]}"></span>
+                        ${row.category}
+                    </td>
+                    <td class="p-3.5 text-center">
+                        <input type="number" step="1" value="${row.metric1}" 
+                            onchange="updateValue(${index}, 'metric1', this.value)"
+                            class="w-20 bg-slate-900 border border-slate-700 rounded-lg text-center text-sky-400 font-semibold focus:ring-2 focus:ring-sky-500 focus:outline-none py-1">
+                    </td>
+                    <td class="p-3.5 text-center">
+                        <input type="number" step="0.1" value="${row.metric2}" 
+                            onchange="updateValue(${index}, 'metric2', this.value)"
+                            class="w-20 bg-slate-900 border border-slate-700 rounded-lg text-center text-crimson-400 font-semibold focus:ring-2 focus:ring-crimson-500 focus:outline-none py-1">
+                    </td>
+                    <td class="p-3.5 text-center font-medium text-slate-300">${sharePercent}%</td>
+                    <td class="p-3.5 text-center font-medium text-cyan-400">${ratio}</td>
+                    <td class="p-3.5 text-right w-36">
+                        <div class="w-full bg-slate-800 rounded-full h-2.5 overflow-hidden border border-slate-700">
+                            <div class="h-2.5 rounded-full transition-all duration-500" style="width: ${barWidth}%; background-color: ${themeColors.categoryColors[index % 4]}"></div>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            renderCustomLegend();
+        }
+
+        function updateValue(index, key, val) {
+            const parsedVal = parseFloat(val) || 0;
+            currentData[index][key] = parsedVal;
+            
+            // Re-render components
+            refreshAll();
+        }
+
+        function resetData() {
+            currentData = JSON.parse(JSON.stringify(initialData));
+            refreshAll();
+        }
+
+        function refreshAll() {
+            // Update charts
+            comboChart.data = getComboData();
+            comboChart.update();
+
+            donutChart.data = getDonutData();
+            donutChart.update();
+
+            radarChart.data = getRadarData();
+            radarChart.update();
+
+            renderTable();
+            updateKPIsAndInsights();
+        }
+
+        function updateKPIsAndInsights() {
+            const totalM1 = currentData.reduce((acc, curr) => acc + curr.metric1, 0);
+            const totalM2 = currentData.reduce((acc, curr) => acc + curr.metric2, 0);
+            const avgRatio = totalM1 > 0 ? (totalM2 / totalM1).toFixed(3) : '0.000';
+
+            // Find top performer based on Metric 1
+            let topCat = currentData[0] || { category: '-', metric1: 0, metric2: 0 };
+            currentData.forEach(d => {
+                if (d.metric1 > topCat.metric1) topCat = d;
+            });
+
+            // Find lowest performer
+            let lowCat = currentData[0] || { category: '-', metric1: 0, metric2: 0 };
+            currentData.forEach(d => {
+                if (d.metric1 < lowCat.metric1) lowCat = d;
+            });
+
+            document.getElementById('kpi-metric1-total').innerText = totalM1.toLocaleString();
+            document.getElementById('kpi-metric2-total').innerText = totalM2.toFixed(1);
+            document.getElementById('kpi-top-category').innerText = topCat.category;
+            document.getElementById('kpi-top-details').innerText = `Metric 1: ${topCat.metric1} | Metric 2: ${topCat.metric2}`;
+            document.getElementById('kpi-avg-ratio').innerText = avgRatio;
+
+            // Table footers
+            document.getElementById('table-total-m1').innerText = totalM1;
+            document.getElementById('table-total-m2').innerText = totalM2.toFixed(1);
+            document.getElementById('table-avg-ratio').innerText = avgRatio;
+
+            // Render Insights
+            const insightBox = document.getElementById('insightBox');
+            insightBox.innerHTML = `
+                <div class="flex items-center gap-1.5 text-sky-400 font-semibold mb-1">
+                    <i data-lucide="sparkles" class="w-4 h-4"></i>
+                    ข้อสรุปอัตโนมัติ (Automated Insights)
+                </div>
+                <p class="text-slate-300">
+                    • หมวดหมู่โดดเด่นที่สุดคือ <span class="text-sky-400 font-bold">${topCat.category}</span> ครองสัดส่วนสูงถึง <span class="text-emerald-400 font-bold">${totalM1 > 0 ? ((topCat.metric1 / totalM1)*100).toFixed(1) : 0}%</span> ของทั้งหมด
+                </p>
+                <p class="text-slate-300">
+                    • หมวดหมู่ที่มีปริมาณน้อยที่สุดคือ <span class="text-crimson-400 font-bold">${lowCat.category}</span> (คิดเป็น ${totalM1 > 0 ? ((lowCat.metric1 / totalM1)*100).toFixed(1) : 0}%)
+                </p>
+            `;
+            lucide.createIcons();
+        }
+
+        function renderCustomLegend() {
+            const legendContainer = document.getElementById('donutLegend');
+            const totalM1 = currentData.reduce((acc, curr) => acc + curr.metric1, 0);
+            
+            legendContainer.innerHTML = currentData.map((d, i) => {
+                const pct = totalM1 > 0 ? ((d.metric1 / totalM1) * 100).toFixed(0) : 0;
+                return `
+                    <div class="flex items-center justify-between p-1.5 rounded bg-slate-900/40">
+                        <span class="flex items-center gap-1.5 font-medium text-slate-300">
+                            <span class="w-2.5 h-2.5 rounded-full" style="background-color: ${themeColors.categoryColors[i % 4]}"></span>
+                            ${d.category}
+                        </span>
+                        <span class="font-semibold text-slate-100">${pct}%</span>
+                    </div>
+                `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>
